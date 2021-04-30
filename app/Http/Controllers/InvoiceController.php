@@ -202,10 +202,11 @@ class InvoiceController extends Controller
 
     public function unpaid()
     {
-        $invoices = Invoice::where('paid','=','0')->get();
+//        $invoices = Invoice::where('paid','=','0')->get();
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('invoices/unpaid', compact('invoices'));
+//        $pdf->loadView('invoices/unpaid', compact('invoices'));
+        $pdf->loadView('invoices/unpaid');
         return $pdf->stream('unpaid.pdf');
     }
 }

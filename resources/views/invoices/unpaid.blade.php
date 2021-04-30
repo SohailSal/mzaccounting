@@ -26,6 +26,7 @@
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
             $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
 
+        $invoices = App\Invoice::where('paid','=','0')->get();
 
             $dt = \Carbon\Carbon::now(new DateTimeZone('Asia/Karachi'))->format('M d, Y - h:m a');
 
