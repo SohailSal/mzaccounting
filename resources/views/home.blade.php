@@ -34,7 +34,7 @@
 <a style="margin: 19px;" href="{{ route('posts.index')}}" class="btn btn-primary">Unposted Payments</a>
 <a style="margin: 19px;" href="{{ route('payments.index')}}" class="btn btn-primary">Payments</a>
     <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
-    <a style="margin: 19px;" href="{{action('PaymentController@getPayments',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Payments PDF</a>
+    <!-- <a style="margin: 19px;" href="{{action('PaymentController@getPaymentsn',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Payments PDF</a> -->
 
                 </div>
             </div>

@@ -116,6 +116,7 @@ class PaymentController extends Controller
         $start = $request->input('date_start');
         $end = $request->input('date_end');
         $payments = Payment::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
+//        dd($payments);
         $period = "From ".strval($start)." to ".strval($end);
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
@@ -124,6 +125,44 @@ class PaymentController extends Controller
 
     }
 
+    public function getPaymentsn(Request $request)
+    {
+            $fmt = new \NumberFormatter( 'en_GB', \NumberFormatter::CURRENCY );
+            $fmt->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 0);
+            $fmt->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
+//dd($fmt);
+            $tZone = new \DateTimeZone("Asia/Karachi");
+            $dt = \Carbon\Carbon::now($tZone)->format('M d, Y - h:m a');
+//dd($dt);
+            $total = 0;
+
+            $payments = Payment::all();
+        foreach ($payments as $item) {
+            $total = $total + $item->amount;
+        }
+//dd($total);
+
+            $paymentsn = Payment::all()->map(function($payment){
+            return [
+                'ref' => $payment->ref,
+                'date_of_payment' => $payment->date_of_payment,
+                'head_of_account' => $payment->account->head_of_account,
+                'description' => $payment->description,
+                'payee' => $payment->payee,
+                'cheque' => $payment->cheque,
+  //              'amount' => str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.')),
+                'amount' => $payment->amount,
+                ];
+            });
+
+ dd($paymentsn); 
+//            $total = str_replace(['Rs.','.00'],'',$fmt->formatCurrency($total,'Rs.'));
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('payments/detailn', compact('paymentsn','dt','total'))->setPaper('a4', 'landscape');
+        return $pdf->stream('payments.pdf');
+    }
 
     public function postPV($id)
     {

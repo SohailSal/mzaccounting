@@ -60,6 +60,8 @@ Route::get('/getReceipts', 'ReceiptController@getReceipts')->middleware('auth');
 
 Route::get('/getPayments', 'PaymentController@getPayments')->middleware('auth');
 
+Route::get('/getPaymentsn', 'PaymentController@getPaymentsn')->middleware('auth');
+
 Route::get('/envelop/{id}', 'ClientController@envelop')->middleware('auth');
 
 Route::get('/getTrial', 'EntryController@getTrial')->middleware('auth');

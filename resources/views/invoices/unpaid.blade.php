@@ -27,7 +27,7 @@
             $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
 
         $invoices = App\Invoice::where('paid','=','0')->get();
-
+//$invoices = DB::table('invoices')->where('paid','=','0')->get();
             $dt = \Carbon\Carbon::now(new DateTimeZone('Asia/Karachi'))->format('M d, Y - h:m a');
 
             $total = 0;
@@ -104,14 +104,17 @@
             </td>
 
       <?php
+            if(App\InvoiceEntry::where([['invoice_id',$item->id],['description','Total']])->first()){
                 $inv = App\InvoiceEntry::where([['invoice_id',$item->id],['description','Total']])->first();
                 $total = $total + $inv->amount;
+            }
     ?>
 
-
+            @if(App\InvoiceEntry::where([['invoice_id',$item->id],['description','Total']])->first())
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
                 {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($inv->amount,'Rs.'))}}
             </td>
+            @endif
         </tr>
         @endforeach
         <tr>
