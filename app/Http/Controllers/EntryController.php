@@ -8,7 +8,9 @@ use App\Entry;
 use App\Account;
 use App\Exports\EntryExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 use PDF;
+use Illuminate\Database\Eloquent\Collection;
 
 class EntryController extends Controller
 {
@@ -149,8 +151,54 @@ class EntryController extends Controller
         $start = $request->input('date_start');
         $end = $request->input('date_end');
         $account = $request->input('account_id');
-        $entries = Entry::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->where('account_id','=',$account)->get();
-        $previous = Entry::whereDate('created_at','<',$start)->where('account_id','=',$account)->get();
+        // $entries = Entry::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->where('account_id','=',$account)->get();
+//         $previous = Entry::whereDate('created_at','<',$start)->where('account_id','=',$account)->get();
+
+        // $entries = Entry::with('transaction')
+        //     ->whereDate('date_of_transaction','>=',$start)
+        //     ->whereDate('date_of_transaction','<=',$end)
+        // ->where('account_id','=',$account)->get();
+
+//         $dateClause = env('DB_CONNECTION') === 'sqlite' ?
+//     'strftime("%Y-%m-%d", transactions.date_of_transaction) as date_of_transaction' :
+//     'date_format(transactions.date_of_transaction, "%Y-%m-%d") as date_of_transaction';
+//         $entries = DB::table('transactions')
+//         ->join('entries', 'transactions.id', '=', 'entries.transaction_id')
+//         ->where('entries.account_id', '=', $account)
+// //        ->where('transactions.date_of_transaction','>=',$start)
+// //        ->where('transactions.date_of_transaction','<=',$end)
+//         ->selectRaw('entries.*')
+//         ->get();
+// //        $entries->date_of_transaction->format('Y-m-d');
+
+        $entries = Entry::where('account_id','=',$account)->get()
+                ->map(function ($entry){
+                    return [
+                        'id' => $entry->id,
+                        'account_id' => $entry->account_id,
+                        'debit' => $entry->debit,
+                        'credit' => $entry->credit,
+                        'ref' => $entry->transaction->ref,
+                        'description' => $entry->transaction->description,
+                        'date_of_transaction' => Carbon::parse($entry->transaction->date_of_transaction)->toDateString(),
+                    ];
+                })->where('date_of_transaction','>=',$start)
+                  ->where('date_of_transaction','<=',$end);   
+
+        $previous = Entry::where('account_id','=',$account)->get()
+                ->map(function ($entry){
+                    return [
+                        'id' => $entry->id,
+                        'account_id' => $entry->account_id,
+                        'debit' => $entry->debit,
+                        'credit' => $entry->credit,
+                        'ref' => $entry->transaction->ref,
+                        'description' => $entry->transaction->description,
+                        'date_of_transaction' => Carbon::parse($entry->transaction->date_of_transaction)->toDateString(),
+                    ];
+                })->where('date_of_transaction','<',$start);   
+//dd($entries);
+
         $acc = Account::where('id','=',$account)->first();
         $period = "From ".strval($start)." to ".strval($end);
         $pdf = app('dompdf.wrapper');

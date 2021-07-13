@@ -34,7 +34,7 @@
 
             if ($previous->count()) { 
                 foreach ($previous as $value) {
-                $prebal= $lastbalance + floatval($value->debit) - floatval($value->credit);
+                $prebal= $lastbalance + floatval($value['debit']) - floatval($value['credit']);
                 $lastbalance = $prebal;
                 $ite++;
                 }
@@ -43,7 +43,7 @@
             $balance = [];
             $ite = 0;
             foreach ($entries as $value) {
-               $balance[$ite]= $lastbalance + floatval($value->debit) - floatval($value->credit);
+               $balance[$ite]= $lastbalance + floatval($value['debit']) - floatval($value['credit']);
                 $lastbalance = $balance[$ite];
                $ite++;
             }
@@ -120,23 +120,26 @@
 
         @foreach ($entries as $entry)
 
+    <?php
+            $trans_date = \Carbon\Carbon::parse($entry['date_of_transaction'])->format('d-m-Y');
+    ?>
         <tr>
             <td style="width: 15%;">
-                {{$entry->transaction->ref}}
+                {{$entry['ref']}}
             </td>
             <td style="width: 15%;">
-                {{$entry->transaction->date_of_transaction}}
+                {{$trans_date}}
             </td>
             <td style="width: 40%; border-right: 1pt solid black;">
-                {{$entry->transaction->description}}
+                {{$entry['description']}}
 
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->debit,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['debit'],'Rs.'))}}
 
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->credit,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['credit'],'Rs.'))}}
 
             </td>
             <td style="width: 10%" align="right">
@@ -146,8 +149,8 @@
         </tr>
 
         <?php
-                $debits = $debits + $entry->debit;
-                $credits = $credits + $entry->credit;
+                $debits = $debits + $entry['debit'];
+                $credits = $credits + $entry['credit'];
         ?>
 
         @endforeach
