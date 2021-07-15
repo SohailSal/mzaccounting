@@ -71,30 +71,34 @@
             <tbody>
         @foreach ($receipts as $item)
 
+    <?php
+            $trans_date = \Carbon\Carbon::parse($item['date_of_receipt'])->format('d-m-Y');
+    ?>
+
         <tr>
             <td style="width: 15%; border-right: 1pt solid black; border-left: 1pt solid black;">
-                {{$item->ref}}
+                {{$item['ref']}}
             </td>
             <td style="width: 10%; border-right: 1pt solid black;">
-                {{$item->date_of_receipt}}
+                {{$trans_date}}
             </td>
             <td style="width: 40%; border-right: 1pt solid black;">
-                {{$item->account->head_of_account}}
+                {{$item['head_of_account']}}
             </td>
             <td style="width: 15%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item->amount,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item['amount'],'Rs.'))}}
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item->itax,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item['itax'],'Rs.'))}}
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item->stax,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item['stax'],'Rs.'))}}
             </td>
         </tr>
         <?php
-                $totalr = $totalr + $item->amount;
-                $totalt = $totalt + $item->itax;
-                $totals = $totals + $item->stax;
+                $totalr = $totalr + $item['amount'];
+                $totalt = $totalt + $item['itax'];
+                $totals = $totals + $item['stax'];
         ?>
         @endforeach
         <tr>

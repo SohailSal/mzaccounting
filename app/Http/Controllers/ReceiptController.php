@@ -218,7 +218,21 @@ class ReceiptController extends Controller
 
         $start = $request->input('date_start');
         $end = $request->input('date_end');
-        $receipts = Receipt::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
+//        $receipts = Receipt::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
+
+        $receipts = Receipt::all()
+                ->map(function ($item){
+                    return [
+                        'ref' => $item->ref,
+                        'date_of_receipt' => Carbon::parse($item->date_of_receipt)->toDateString(),
+                        'head_of_account' => $item->account->head_of_account,
+                        'amount' => $item->amount,
+                        'itax' => $item->itam,
+                        'stax' => $item->stax,
+                    ];
+                })->where('date_of_receipt','>=',$start)
+                  ->where('date_of_receipt','<=',$end);
+
         $period = "From ".strval($start)." to ".strval($end);
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);

@@ -71,32 +71,35 @@
             </thead>
             <tbody>
         @foreach ($payments as $item)
+    <?php
+            $trans_date = \Carbon\Carbon::parse($item['date_of_payment'])->format('d-m-Y');
+    ?>
 
         <tr>
             <td style="border-right: 1pt solid black; border-left: 1pt solid black;">
-                {{$item->ref}}
+                {{$item['ref']}}
             </td>
             <td style="border-right: 1pt solid black;">
-                {{$item->date_of_payment}}
+                {{$trans_date}}
             </td>
             <td style="border-right: 1pt solid black;">
-                {{$item->account->head_of_account}}
+                {{$item['head_of_account']}}
             </td>
             <td style="border-right: 1pt solid black;">
-                {{$item->description}}
+                {{$item['description']}}
             </td>
             <td style="border-right: 1pt solid black;">
-                {{$item->payee}}
+                {{$item['payee']}}
             </td>
             <td style="border-right: 1pt solid black;" align="centre">
-                {{$item->cheque}}
+                {{$item['cheque']}}
             </td>
             <td style="border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item->amount,'Rs.'))}}
+                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($item['amount'],'Rs.'))}}
             </td>
         </tr>
         <?php
-                $total = $total + $item->amount;
+                $total = $total + $item['amount'];
         ?>
         @endforeach
         <tr>

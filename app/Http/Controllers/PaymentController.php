@@ -9,6 +9,7 @@ use App\Transaction;
 use App\Entry;
 use App\Account;
 use App\Post;
+use Carbon\Carbon;
 use PDF;
 
 
@@ -115,8 +116,24 @@ class PaymentController extends Controller
 
         $start = $request->input('date_start');
         $end = $request->input('date_end');
-        $payments = Payment::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
+//        $payments = Payment::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
 //        dd($payments);
+
+        $payments = Payment::all()
+                ->map(function ($item){
+                    return [
+                        'ref' => $item->ref,
+                        'date_of_payment' => Carbon::parse($item->date_of_payment)->toDateString(),
+                        'head_of_account' => $item->account->head_of_account,
+                        'description' => $item->description,
+                        'payee' => $item->payee,
+                        'cheque' => $item->cheque,
+                        'amount' => $item->amount,
+                    ];
+                })->where('date_of_payment','>=',$start)
+                  ->where('date_of_payment','<=',$end);
+
+
         $period = "From ".strval($start)." to ".strval($end);
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
