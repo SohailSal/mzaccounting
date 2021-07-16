@@ -227,7 +227,7 @@ class ReceiptController extends Controller
                         'date_of_receipt' => Carbon::parse($item->date_of_receipt)->toDateString(),
                         'head_of_account' => $item->account->head_of_account,
                         'amount' => $item->amount,
-                        'itax' => $item->itam,
+                        'itax' => $item->itax,
                         'stax' => $item->stax,
                     ];
                 })->where('date_of_receipt','>=',$start)
