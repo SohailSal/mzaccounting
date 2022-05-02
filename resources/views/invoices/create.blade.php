@@ -98,7 +98,7 @@
 <div class="row">
         <div class="float-right">
                 <button class="btn btn-sm btn-primary add_more_button">Add More Fields</button>
-                <button type="submit" class="btn btn-primary">Enter Invoice</button>
+                <button id="go" type="submit" class="btn btn-primary">Enter Invoice</button>
         </div>
 </div>
 
@@ -232,12 +232,12 @@ $('.input_fields_container_part').on("click",".remove_field", function(e){
         $('.reference').val(ref2);
     });
 
+    $('#go').click(function() {
+        $(this).attr('disabled','disabled');
+    });
+
 });
 
-/*  	jQuery(function($) {
- *     	new AutoNumeric('.amount',{mDec:'0'});
- *    });
-*/
 
 </script>
 

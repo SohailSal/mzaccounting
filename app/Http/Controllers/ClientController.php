@@ -16,18 +16,32 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 //        $clients = Client::orderBy('accounts.head_of_account')->paginate(10);
-
+        $clients = null;
+        $search = null;
+        if($request->input('search')){
+        $clients = DB::table('accounts')
+            ->join('clients', 'accounts.id', '=', 'clients.account_id')
+            ->select(DB::raw("clients.*"), "accounts.head_of_account as head_of_account", "accounts.id as ac_id")
+            ->where('accounts.head_of_account', 'LIKE', '%' . $request->input('search') . '%')
+            ->orderBy('accounts.head_of_account')
+            ->paginate(10)
+            ->appends(request()->query());
+        $search = $request->input('search');
+        }
+        else{
         $clients = DB::table('accounts')
             ->join('clients', 'accounts.id', '=', 'clients.account_id')
             ->select(DB::raw("clients.*"), "accounts.head_of_account as head_of_account", "accounts.id as ac_id")
             ->orderBy('accounts.head_of_account')
-            ->paginate(10);
+            ->paginate(10)
+            ->appends(request()->query());
+        }
 
         $types = ClientType::all();
-        return view('clients.index', compact('clients','types'));
+        return view('clients.index', compact('clients','types','search'));
     }
 
     /**

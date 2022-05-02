@@ -65,7 +65,7 @@
               <input type="text" class="form-control" name="incorporation"/>
           </div>
 
-          <button type="submit" class="btn btn-primary">Add Client</button>
+          <button id="go" type="submit" class="btn btn-primary">Add Client</button>
       </form>
   </div>
 </div>
@@ -81,6 +81,10 @@ $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {
         event.preventDefault();
         return false;
         }
+    });
+
+    $('#go').click(function() {
+        $(this).attr('disabled','disabled');
     });
 
 });

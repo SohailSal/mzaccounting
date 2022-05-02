@@ -29,7 +29,7 @@
               </select>
           </div>
 
-          <button type="submit" class="btn btn-primary">Add Head of Account</button>
+          <button id="go" type="submit" class="btn btn-primary">Add Head of Account</button>
       </form>
   </div>
 </div>
@@ -45,6 +45,10 @@ $(document).ready(function() {
         event.preventDefault();
         return false;
         }
+    });
+
+    $('#go').click(function() {
+        $(this).attr('disabled','disabled');
     });
 
 });

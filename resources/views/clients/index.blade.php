@@ -9,8 +9,15 @@
   @endif
     <h1 class="display-5">List of Clients</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('clients.create')}}" class="btn btn-primary">New Client</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('clients.create')}}" class="btn btn-primary">New Client</a>
+    <form method="get" action="{{ route('clients.index') }}">
+      @csrf
+      <div class="float-right btn-group">
+        <input type="text" class="form-control" name="search" value="{{$search}}"/>
+        <button class="btn btn-sm btn-primary search">Search</button>
+      </div>
+    </form>
     </div>
     <div>
     {{$clients->links()}}

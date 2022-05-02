@@ -4,11 +4,11 @@
 <br>
 <h2>Trial Balance</h2>
 
-<div class="row">
+<!-- <div class="row">
 <a class="btn btn-outline-secondary" href="{{action('EntryController@getTrial')}}">Trial Balance</a>
 </div>
 
-<br>
+<br> -->
 <form method="get" action="{{ action('EntryController@getTriall') }}">
  @csrf
   <div class="row">

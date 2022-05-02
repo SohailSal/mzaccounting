@@ -78,7 +78,7 @@
 
  <div class="row">
         <div class="float-right">
-                <button type="submit" class="btn btn-primary">Add Receipt</button>
+                <button id="go" type="submit" class="btn btn-primary">Add Receipt</button>
         </div>
 </div>
 
@@ -179,6 +179,10 @@ $(document).ready(function() {
         $('#stax').val(stax);
         $('#itax').val(itax);
         $('#gross').val(gross);
+    });
+
+    $('#go').click(function() {
+        $(this).attr('disabled','disabled');
     });
 
 });

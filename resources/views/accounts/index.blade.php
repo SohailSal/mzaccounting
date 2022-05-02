@@ -9,8 +9,8 @@
   @endif
     <h1 class="display-5">Heads of Account</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('accounts.create')}}" class="btn btn-primary">New Head of Account</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('accounts.create')}}" class="btn btn-primary">New Head of Account</a>
     </div>
     <div>
     {{$accounts->links()}}

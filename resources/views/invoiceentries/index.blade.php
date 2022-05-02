@@ -9,7 +9,7 @@
   @endif
     <h1 class="display-5">Entry</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('invoiceentries.create')}}" class="btn btn-primary">New Entry</a>
+    <a style="margin: 5px;" href="{{ route('invoiceentries.create')}}" class="btn btn-primary">New Entry</a>
     </div>
   <table class="table table-striped">
     <thead>

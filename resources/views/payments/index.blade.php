@@ -9,8 +9,8 @@
   @endif
     <h1 class="display-5">Payments</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
     <a href="{{action('PaymentController@getPayments',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Payments PDF</a>
     </div>
        <?php

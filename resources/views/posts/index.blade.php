@@ -9,8 +9,8 @@
   @endif
     <h1 class="display-5">Unposted Payments</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
     </div>
        <?php
             $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );

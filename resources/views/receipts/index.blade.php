@@ -9,8 +9,8 @@
   @endif
     <h1 class="display-5">Receipts</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('receipts.create')}}" class="btn btn-primary">New Receipt</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('receipts.create')}}" class="btn btn-primary">New Receipt</a>
     <a href="{{action('ReceiptController@getReceipts',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Receipts PDF</a>
     </div>
 

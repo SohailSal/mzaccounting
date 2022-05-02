@@ -83,7 +83,7 @@
 
  <div class="row">
         <div class="float-right">
-                <button type="submit" class="btn btn-primary">Enter Payment</button>
+                <button id="go" type="submit" class="btn btn-primary">Enter Payment</button>
         </div>
 </div>
 
@@ -140,6 +140,10 @@ nfObject = new Intl.NumberFormat('en-US');
         $('#amount').prop('readonly',true);
         $('.hiding').fadeIn('medium');
         }
+    });
+
+    $('#go').click(function() {
+        $(this).attr('disabled','disabled');
     });
 
 });

@@ -9,8 +9,8 @@
   @endif
     <h1 class="display-5">Transactions</h1>
     <div>
-    <a style="margin: 19px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
-    <a style="margin: 19px;" href="{{ route('transactions.create')}}" class="btn btn-primary">New Transaction</a>
+    <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
+    <a style="margin: 5px;" href="{{ route('transactions.create')}}" class="btn btn-primary">New Transaction</a>
     </div>
     <div>
     {{$transactions->links()}}
