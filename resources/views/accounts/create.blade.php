@@ -29,7 +29,7 @@
               </select>
           </div>
 
-          <button id="go" type="submit" class="btn btn-primary">Add Head of Account</button>
+          <button type="submit" class="btn btn-primary">Add Head of Account</button>
       </form>
   </div>
 </div>

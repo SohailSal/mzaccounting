@@ -65,7 +65,7 @@
               <input type="text" class="form-control" name="incorporation"/>
           </div>
 
-          <button id="go" type="submit" class="btn btn-primary">Add Client</button>
+          <button type="submit" class="btn btn-primary">Add Client</button>
       </form>
   </div>
 </div>

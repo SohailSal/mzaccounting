@@ -78,7 +78,7 @@
 
  <div class="row">
         <div class="float-right">
-                <button id="go" type="submit" class="btn btn-primary">Add Receipt</button>
+                <button type="submit" class="btn btn-primary">Add Receipt</button>
         </div>
 </div>
 

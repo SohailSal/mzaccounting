@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<form method="post" action="{{ route('invoices.store') }}">
+<form method="post" action="{{ route('invoices.store') }}" class="prevent-multi">
  @csrf
 <div class="row">
           <div class="form-group float-left">
@@ -98,7 +98,7 @@
 <div class="row">
         <div class="float-right">
                 <button class="btn btn-sm btn-primary add_more_button">Add More Fields</button>
-                <button id="go" type="submit" class="btn btn-primary">Enter Invoice</button>
+                <button type="submit" class="btn btn-primary prevent-multi-submit">Enter Invoice</button>
         </div>
 </div>
 
@@ -234,6 +234,11 @@ $('.input_fields_container_part').on("click",".remove_field", function(e){
 
     $('#go').click(function() {
         $(this).attr('disabled','disabled');
+    });
+
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });

@@ -95,7 +95,7 @@
 <div class="row">
         <div class="float-right">
                 <button class="btn btn-sm btn-primary add_more_button">Add More Fields</button>
-                <button id="go" type="submit" class="btn btn-primary" disabled>Add Transaction</button>
+                <button type="submit" class="btn btn-primary" disabled>Add Transaction</button>
         </div>
 </div>
 

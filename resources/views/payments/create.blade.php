@@ -83,7 +83,7 @@
 
  <div class="row">
         <div class="float-right">
-            <button id="go" type="submit" class="btn btn-primary">Enter Payment</button>
+            <button type="submit" class="btn btn-primary">Enter Payment</button>
         </div>
 </div>
 
