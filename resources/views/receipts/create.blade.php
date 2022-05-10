@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<form method="post" action="{{ route('receipts.store') }}">
+<form method="post" action="{{ route('receipts.store') }}" class="prevent-multi">
  @csrf
 <div class="row">
           <div class="form-group float-left">
@@ -78,7 +78,7 @@
 
  <div class="row">
         <div class="float-right">
-                <button type="submit" class="btn btn-primary">Add Receipt</button>
+                <button type="submit" class="btn btn-primary prevent-multi-submit">Add Receipt</button>
         </div>
 </div>
 
@@ -181,8 +181,9 @@ $(document).ready(function() {
         $('#gross').val(gross);
     });
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });

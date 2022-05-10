@@ -13,7 +13,7 @@
     @endif
     <h1 class="display-5">Add a Client</h1>
   <div>
-      <form method="post" action="{{ route('clients.store') }}">
+      <form method="post" action="{{ route('clients.store') }}" class="prevent-multi">
           @csrf
           <div class="form-group">
               <label for="name_of_client">Name of Client:</label>
@@ -65,7 +65,7 @@
               <input type="text" class="form-control" name="incorporation"/>
           </div>
 
-          <button type="submit" class="btn btn-primary">Add Client</button>
+          <button type="submit" class="btn btn-primary prevent-multi-submit">Add Client</button>
       </form>
   </div>
 </div>
@@ -83,8 +83,9 @@ $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {
         }
     });
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });

@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<form method="post" action="{{ route('transactions.store') }}">
+<form method="post" action="{{ route('transactions.store') }}" class="prevent-multi">
  @csrf
 <div class="row">
           <div class="form-group float-left">
@@ -95,7 +95,7 @@
 <div class="row">
         <div class="float-right">
                 <button class="btn btn-sm btn-primary add_more_button">Add More Fields</button>
-                <button type="submit" class="btn btn-primary" disabled>Add Transaction</button>
+                <button type="submit" class="btn btn-primary prevent-multi-submit" disabled>Add Transaction</button>
         </div>
 </div>
 
@@ -193,8 +193,9 @@ $('.input_fields_container_part').on('blur','.credit',function(){
     }
     }
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });

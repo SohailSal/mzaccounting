@@ -232,10 +232,6 @@ $('.input_fields_container_part').on("click",".remove_field", function(e){
         $('.reference').val(ref2);
     });
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
-    });
-
     $('.prevent-multi').on('submit', function(){
         $('.prevent-multi-submit').attr('disabled','true');
         return true;

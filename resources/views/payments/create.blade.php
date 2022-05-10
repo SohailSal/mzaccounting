@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<form method="post" action="{{ route('payments.store') }}">
+<form method="post" action="{{ route('payments.store') }}" class="prevent-multi">
  @csrf
 <div class="row">
           <div class="form-group float-left">
@@ -83,7 +83,7 @@
 
  <div class="row">
         <div class="float-right">
-            <button type="submit" class="btn btn-primary">Enter Payment</button>
+            <button type="submit" class="btn btn-primary prevent-multi-submit">Enter Payment</button>
         </div>
 </div>
 
@@ -142,8 +142,9 @@ nfObject = new Intl.NumberFormat('en-US');
         }
     });
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });

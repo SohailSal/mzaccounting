@@ -13,7 +13,7 @@
     @endif
     <h1 class="display-5">Add a Head of Account</h1>
   <div>
-      <form method="post" action="{{ route('accounts.store') }}">
+      <form method="post" action="{{ route('accounts.store') }}" class="prevent-multi">
           @csrf
           <div class="form-group">
               <label for="head_of_account">Head of Account:</label>
@@ -29,7 +29,7 @@
               </select>
           </div>
 
-          <button type="submit" class="btn btn-primary">Add Head of Account</button>
+          <button type="submit" class="btn btn-primary prevent-multi-submit">Add Head of Account</button>
       </form>
   </div>
 </div>
@@ -47,8 +47,9 @@ $(document).ready(function() {
         }
     });
 
-    $('#go').click(function() {
-        $(this).attr('disabled','disabled');
+    $('.prevent-multi').on('submit', function(){
+        $('.prevent-multi-submit').attr('disabled','true');
+        return true;
     });
 
 });
