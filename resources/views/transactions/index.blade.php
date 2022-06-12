@@ -21,7 +21,7 @@
           <td>Ref</td>
           <td>Date of Transaction</td>
           <td>Description</td>
-          <td colspan = 2 style="text-align:center;">Actions</td>
+          <td style="text-align:center;">Actions</td>
         </tr>
     </thead>
     <tbody>
@@ -33,9 +33,9 @@
             <td>
                 <a href="{{ route('transactions.show',$transaction->id)}}" class="btn btn-info">Show</a>
           	</td>
-            <td>
+            <!-- <td>
                 <a href="{{ route('transactions.edit',$transaction->id)}}" class="btn btn-primary">Edit</a>
-            </td>
+            </td> -->
         </tr>
         @endforeach
     </tbody>

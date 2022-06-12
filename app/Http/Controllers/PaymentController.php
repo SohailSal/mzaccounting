@@ -26,6 +26,11 @@ class PaymentController extends Controller
         return view('payments.index', compact('payments'));
     }
 
+    public function indexx()
+    {
+        $payments = Payment::orderBy('created_at', 'DESC')->paginate(10);
+        return view('payments.indexx', compact('payments'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -87,6 +92,21 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
+        DB::transaction(function () use ($id) {
+
+            $payment = Payment::find($id);
+            $transaction = Transaction::where('ref',$payment->ref)->first();
+            $entries = Entry::where('transaction_id',$transaction->id)->get();
+
+                foreach ($entries as $entry) {
+                    $entry->delete();
+                }
+                $transaction->delete();
+                $payment->delete();
+            });
+
+        return redirect('/erasePayment')->with('success', 'Payment deleted!');
+
     }
 
 

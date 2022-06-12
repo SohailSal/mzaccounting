@@ -80,3 +80,11 @@ Route::get('/postPV/{id}', 'PaymentController@postPV')->middleware('auth');
 Route::get('/getReceiptsRange', 'ReceiptController@getReceiptsRange')->middleware('auth');
 
 Route::get('/getPaymentsRange', 'PaymentController@getPaymentsRange')->middleware('auth');
+
+Route::get('/eraser', function () {
+    return view('eraser');
+})->middleware('auth');
+
+Route::get('/erasePayment', 'PaymentController@indexx')->middleware('auth');
+
+Route::get('/erasePost', 'PostController@indexx')->middleware('auth');

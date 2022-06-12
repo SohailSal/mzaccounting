@@ -19,6 +19,11 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function indexx()
+    {
+        $posts = Post::orderBy('created_at', 'ASC')->where('posted','0')->paginate(10);
+        return view('posts.indexx', compact('posts'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -129,6 +134,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        DB::transaction(function () use ($id) {
+            $post = Post::find($id);
+            $post->delete();
+            });
+
+            return redirect('/erasePost')->with('success', 'Unposted entry deleted!');
     }
 
     public function getUPV($id)
