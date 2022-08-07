@@ -193,7 +193,8 @@ class EntryController extends Controller
                         'date_of_transaction' => Carbon::parse($entry->transaction->date_of_transaction)->toDateString(),
                     ];
                 })->where('date_of_transaction','>=',$start)
-                  ->where('date_of_transaction','<=',$end);   
+                  ->where('date_of_transaction','<=',$end)
+                  ->sortBy('date_of_transaction');   
 
         $previous = Entry::where('account_id','=',$account)->get()
                 ->map(function ($entry){

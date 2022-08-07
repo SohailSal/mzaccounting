@@ -11,7 +11,7 @@
     <div>
     <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
     <a style="margin: 5px;" href="{{ route('posts.create')}}" class="btn btn-primary">New Payment</a>
-    <a href="{{action('PaymentController@getPayments',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Payments PDF</a>
+    <!-- <a href="{{action('PaymentController@getPayments',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Payments PDF</a> -->
     </div>
        <?php
             $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
@@ -29,7 +29,7 @@
           <td>Head of Account</td>
           <td>Payee</td>
           <td align='right'>Amount</td>
-          <td colspan = 2 style="text-align:center;">Actions</td>
+          <td colspan = 3 style="text-align:center;">Actions</td>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +40,9 @@
             <td>{{$payment->account->head_of_account}}</td>
             <td>{{$payment->payee}}</td>
             <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.'))}}</td>
+            <td>
+                <a href="{{ route('payments.edit',$payment->id)}}" class="btn btn-primary">Edit</a>
+            </td>
             <td>
                 <a href="{{ route('payments.show',$payment->id)}}" class="btn btn-info">Show</a>
           	</td>

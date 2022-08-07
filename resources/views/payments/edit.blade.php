@@ -11,27 +11,55 @@
             </ul>
         </div>
         @endif
-        <h1 class="display-5">Update a Transaction</h1>
-        <form method="post" action="{{ route('transactions.update', $transaction->id) }}">
+        <h1 class="display-5">Update a Payment</h1>
+        <form method="post" action="{{ route('payments.update', $payment->id) }}">
             @method('PATCH')
             @csrf
+
             <div class="form-group">
-                <label for="ref">Reference:</label>
-                <input type="text" class="form-control" name="ref" value="{{ $transaction->ref }}" />
+                <label for="date_of_payment">Date of Payment:</label>
+                <input type="text" class="form-control date" name="date_of_payment"/>
             </div>
 
             <div class="form-group">
-                <label for="date_of_transaction">Date of transaction:</label>
-                <input type="text" class="form-control" name="date_of_transaction" value="{{ $transaction->date_of_transaction }}" />
+              <label for="account_id">Head of Account:</label>
+              <select class="form-control" name="account_id">
+                  @foreach (App\Account::all() as $item)
+                    <option value="{{$item->id}}" {{$item->id == $payment->account_id ? 'selected':''}}> {{$item->head_of_account}} </option>
+                  @endforeach
+              </select>
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" value="{{ $transaction->description }}" />
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
-
-            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function() {
+
+    $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+        }
+    });
+
+    $('.date').datepicker({
+            autoclose: true,
+            format: "dd-mm-yyyy",
+            immediateUpdates: true,
+            todayBtn: true,
+            todayHighlight: true
+        }).datepicker("setDate", "<?php echo $payment->date_of_payment ?>");
+
+});
+
+
+</script>
+
 @endsection

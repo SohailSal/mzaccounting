@@ -63,33 +63,35 @@ class PaymentController extends Controller
         return view('payments.show', compact('payment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        $payment = Payment::find($id);
+        return view('payments.edit', compact('payment'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'date_of_payment' => 'required',
+            'account_id' => 'required',
+        ]);
+
+        DB::transaction(function () use ($request, $id) {
+            $payment = Payment::find($id);
+            $transaction = Transaction::where('ref',$payment->ref)->first();
+            $entries = Entry::where('transaction_id',$transaction->id)->get();
+            $payment->date_of_payment =  $request->get('date_of_payment');
+            $payment->account_id = $request->get('account_id');
+            $payment->save();
+            $transaction->date_of_transaction = $request->get('date_of_payment');
+            $transaction->save();
+            $entries[0]->account_id = $request->get('account_id');
+            $entries[0]->save();
+        });
+
+        return redirect('/payments')->with('success', 'Payment updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::transaction(function () use ($id) {
