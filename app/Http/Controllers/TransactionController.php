@@ -113,36 +113,27 @@ class TransactionController extends Controller
         return view('transactions.show', compact('transaction'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        return view('transactions.edit');
-
+        $transaction = Transaction::find($id);
+        return view('transactions.edit', compact('transaction'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'date_of_transaction' => 'required',
+        ]);
 
+        DB::transaction(function () use ($request, $id) {
+            $transaction = Transaction::find($id);
+            $transaction->date_of_transaction =  $request->get('date_of_transaction');
+            $transaction->save();
+        });
+
+        return redirect('/transactions')->with('success', 'Transaction updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
 

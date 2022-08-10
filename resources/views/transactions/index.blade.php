@@ -31,11 +31,11 @@
             <td>{{$transaction->date_of_transaction}}</td>
             <td>{{$transaction->description}}</td>
             <td>
+                <a href="{{ route('transactions.edit',$transaction->id)}}" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
                 <a href="{{ route('transactions.show',$transaction->id)}}" class="btn btn-info">Show</a>
           	</td>
-            <!-- <td>
-                <a href="{{ route('transactions.edit',$transaction->id)}}" class="btn btn-primary">Edit</a>
-            </td> -->
         </tr>
         @endforeach
     </tbody>
