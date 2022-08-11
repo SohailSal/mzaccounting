@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Transaction;
+use Carbon\Carbon;
 use App\Entry;
 
 class TransactionController extends Controller
@@ -16,8 +17,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::orderBy('created_at','DESC')->paginate(10);
-        return view('transactions.index', compact('transactions'));
+       $transactions = Transaction::where('ref','like','%JV%')->orderBy('created_at', 'DESC')->paginate(15);
+       return view('transactions.index', compact('transactions'));
     }
 
     /**
