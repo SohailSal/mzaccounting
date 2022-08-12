@@ -31,7 +31,7 @@
           <td align='right'>Amount</td>
           <td align='right'>Income Tax withheld</td>
           <td align='right'>Sales Tax withheld</td>
-          <td colspan = 1 style="text-align:center;"></td>
+          <td colspan = 2 style="text-align:center;">Actions</td>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +43,9 @@
             <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->amount,'Rs.'))}}</td>
             <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->itax,'Rs.'))}}</td>
             <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->stax,'Rs.'))}}</td>
+            <td>
+                <a href="{{ route('receipts.edit',$receipt->id)}}" class="btn btn-primary">Edit</a>
+            </td>
             <td>
                 <a href="{{ route('receipts.show',$receipt->id)}}" class="btn btn-info">Show</a>
           	</td>

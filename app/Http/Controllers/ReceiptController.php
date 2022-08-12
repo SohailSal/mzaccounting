@@ -161,17 +161,26 @@ class ReceiptController extends Controller
      */
     public function edit($id)
     {
+        $receipt = Receipt::find($id);
+        return view('receipts.edit', compact('receipt'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'date_of_receipt' => 'required',
+        ]);
+
+        DB::transaction(function () use ($request, $id) {
+            $receipt = Receipt::find($id);
+            $transaction = Transaction::where('ref',$receipt->ref)->first();
+            $receipt->date_of_receipt =  $request->get('date_of_receipt');
+            $receipt->save();
+            $transaction->date_of_transaction = $request->get('date_of_receipt');
+            $transaction->save();
+        });
+
+        return redirect('/receipts')->with('success', 'Receipt updated!');
     }
 
     /**

@@ -21,7 +21,7 @@
           <td>Ref</td>
           <td>Date of Transaction</td>
           <td>Description</td>
-          <td style="text-align:center;">Actions</td>
+          <td colspan = 2 style="text-align:center;">Actions</td>
         </tr>
     </thead>
     <tbody>
