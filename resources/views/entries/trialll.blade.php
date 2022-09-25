@@ -32,9 +32,9 @@
                 foreach ($accounts as $account) {
                     $balance = 0;
                     $lastbalance = 0;
-                    $fentries = $account->entries->filter(function ($item) use ($enddate){
+                    $fentries = $account->entries->filter(function ($item) use ($startdate, $enddate){
                         $trans_date = \Carbon\Carbon::parse($item->transaction->date_of_transaction)->toDateString();
-                        return $trans_date <= $enddate ;
+                        return $trans_date >= $startdate && $trans_date <= $enddate ;
                     });
                     foreach ($fentries as $entry) {
                         $balance= $lastbalance + floatval($entry->debit) - floatval($entry->credit);

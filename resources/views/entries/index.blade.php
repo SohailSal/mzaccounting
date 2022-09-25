@@ -23,6 +23,24 @@
   </div>
 </form>
 
+<form method="get" action="{{ action('EntryController@getTrialll') }}">
+ @csrf
+  <div class="row">
+          <div class="form-group float-left">
+              <label for="date_start">Start date:</label>
+              <input type="text" class="form-control date" name="startdate"/>
+          </div>
+          <div class="form-group float-left">
+              <label for="enddate">End date:</label>
+              <input type="text" class="form-control date" name="enddate"/>
+          </div>
+          <div class="form-group float-left">
+              <label for="submit">&nbsp;</label>
+              <button type="submit" class="form-control btn btn-primary" name="submit">Trial Balance</button>
+          </div>
+  </div>
+</form>
+
 <br>
 <h2>Date-wise Ledger</h2>
 

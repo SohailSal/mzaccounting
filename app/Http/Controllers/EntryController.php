@@ -148,6 +148,17 @@ class EntryController extends Controller
         return $pdf->stream('triallbalance.pdf');
     }
 
+    public function getTrialll(Request $request)
+    {
+        $startdate = $request->input('startdate');
+        $enddate = $request->input('enddate');
+//        $enddate = '2021-06-23';
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('entries/trialll', compact('startdate','enddate'));
+        return $pdf->stream('trialllbalance.pdf');
+    }
+
     public function clientBal()
     {
         $pdf = app('dompdf.wrapper');
