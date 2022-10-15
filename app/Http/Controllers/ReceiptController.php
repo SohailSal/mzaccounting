@@ -20,10 +20,30 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $receipts = Receipt::orderBy('created_at', 'DESC')->paginate(10);
-        return view('receipts.index', compact('receipts'));
+        // $receipts = Receipt::orderBy('created_at', 'DESC')->paginate(10);
+        // return view('receipts.index', compact('receipts'));
+
+        $receipts = null;
+        $search = null;
+        if($request->input('search')){
+            $account = null;
+            $id = null;
+            if(Account::where('head_of_account', 'LIKE', '%' . $request->input('search') . '%')->first()) {
+                $account = Account::where('head_of_account', 'LIKE', '%' . $request->input('search') . '%')->first();
+                $id = $account->id;
+            }
+            $receipts = Receipt::where('ref', 'LIKE', '%' . $request->input('search') . '%')->orWhere('account_id', '=', $id )->orderBy('created_at', 'DESC')->paginate(10)->appends(request()->query());
+            $search = $request->input('search');
+        }
+        else{
+            $receipts = Receipt::orderBy('created_at', 'DESC')->paginate(10)->appends(request()->query());
+        }
+        return view('receipts.index', compact('receipts','search'));
+
+
+
     }
 
     /**

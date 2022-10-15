@@ -12,6 +12,13 @@
     <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
     <a style="margin: 5px;" href="{{ route('receipts.create')}}" class="btn btn-primary">New Receipt</a>
     <!-- <a href="{{action('ReceiptController@getReceipts',  ['id'=>'25', 'actual'=> '26'])}}" class="btn btn-primary">Receipts PDF</a> -->
+    <form method="get" action="{{ route('receipts.index') }}">
+      @csrf
+      <div class="float-right btn-group">
+        <input type="text" class="form-control" name="search" value="{{$search}}"/>
+        <button class="btn btn-sm btn-primary search">Search</button>
+      </div>
+    </form>
     </div>
 
        <?php
