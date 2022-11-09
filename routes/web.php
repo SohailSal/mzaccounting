@@ -22,70 +22,70 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('types', 'TypeController')->middleware('auth');
+Route::resource('types', 'TypeController')->middleware(['auth','admin']);
 
-Route::resource('accounts', 'AccountController')->middleware('auth');
+Route::resource('accounts', 'AccountController')->middleware(['auth','admin']);
 
-Route::resource('entries', 'EntryController')->middleware('auth');
+Route::resource('entries', 'EntryController')->middleware(['auth','admin']);
 
-Route::resource('transactions', 'TransactionController')->middleware('auth');
+Route::resource('transactions', 'TransactionController')->middleware(['auth','admin']);
 
-Route::resource('clienttypes', 'ClientTypeController')->middleware('auth');
+Route::resource('clienttypes', 'ClientTypeController')->middleware(['auth','admin']);
 
 Route::resource('clients', 'ClientController')->middleware('auth');
 
 Route::resource('invoices', 'InvoiceController')->middleware('auth');
 
-Route::resource('invoiceentries', 'InvoiceEntryController')->middleware('auth');
+Route::resource('invoiceentries', 'InvoiceEntryController')->middleware(['auth','admin']);
 
-Route::resource('receipts', 'ReceiptController')->middleware('auth');
+Route::resource('receipts', 'ReceiptController')->middleware(['auth','admin']);
 
-Route::resource('payments', 'PaymentController')->middleware('auth');
+Route::resource('payments', 'PaymentController')->middleware(['auth','admin']);
 
-Route::resource('posts', 'PostController')->middleware('auth');
+Route::resource('posts', 'PostController')->middleware(['auth','admin']);
 
 Route::get('/downloadPDF/{id}', 'InvoiceController@downloadPDF')->middleware('auth');
 
-Route::get('/unpaid', 'InvoiceController@unpaid')->middleware('auth');
+Route::get('/unpaid', 'InvoiceController@unpaid')->middleware(['auth','admin']);
 
-Route::get('/findInvoices/{id}', 'ReceiptController@findInvoices')->middleware('auth');
+Route::get('/findInvoices/{id}', 'ReceiptController@findInvoices')->middleware(['auth','admin']);
 
-Route::get('/getLedger', 'AccountController@getLedger')->middleware('auth');
+Route::get('/getLedger', 'AccountController@getLedger')->middleware(['auth','admin']);
 
-Route::get('export', 'EntryController@export')->middleware('auth');
+Route::get('export', 'EntryController@export')->middleware(['auth','admin']);
 
-Route::get('/getLedger2/{id}', 'AccountController@getLedger2')->middleware('auth');
+Route::get('/getLedger2/{id}', 'AccountController@getLedger2')->middleware(['auth','admin']);
 
-Route::get('/getReceipts', 'ReceiptController@getReceipts')->middleware('auth');
+Route::get('/getReceipts', 'ReceiptController@getReceipts')->middleware(['auth','admin']);
 
-Route::get('/getPayments', 'PaymentController@getPayments')->middleware('auth');
+Route::get('/getPayments', 'PaymentController@getPayments')->middleware(['auth','admin']);
 
-Route::get('/getPaymentsn', 'PaymentController@getPaymentsn')->middleware('auth');
+Route::get('/getPaymentsn', 'PaymentController@getPaymentsn')->middleware(['auth','admin']);
 
 Route::get('/envelop/{id}', 'ClientController@envelop')->middleware('auth');
 
-Route::get('/getTrial', 'EntryController@getTrial')->middleware('auth');
-Route::get('/getTriall', 'EntryController@getTriall')->middleware('auth');
-Route::get('/getTrialll', 'EntryController@getTrialll')->middleware('auth');
+Route::get('/getTrial', 'EntryController@getTrial')->middleware(['auth','admin']);
+Route::get('/getTriall', 'EntryController@getTriall')->middleware(['auth','admin']);
+Route::get('/getTrialll', 'EntryController@getTrialll')->middleware(['auth','admin']);
 
-Route::get('/clientBal', 'EntryController@clientBal')->middleware('auth');
+Route::get('/clientBal', 'EntryController@clientBal')->middleware(['auth','admin']);
 
-Route::get('/getLed', 'EntryController@getLed')->middleware('auth');
+Route::get('/getLed', 'EntryController@getLed')->middleware(['auth','admin']);
 
-Route::get('/getPV/{id}', 'PaymentController@getPV')->middleware('auth');
+Route::get('/getPV/{id}', 'PaymentController@getPV')->middleware(['auth','admin']);
 
-Route::get('/getUPV/{id}', 'PostController@getUPV')->middleware('auth');
+Route::get('/getUPV/{id}', 'PostController@getUPV')->middleware(['auth','admin']);
 
-Route::get('/postPV/{id}', 'PaymentController@postPV')->middleware('auth');
+Route::get('/postPV/{id}', 'PaymentController@postPV')->middleware(['auth','admin']);
 
-Route::get('/getReceiptsRange', 'ReceiptController@getReceiptsRange')->middleware('auth');
+Route::get('/getReceiptsRange', 'ReceiptController@getReceiptsRange')->middleware(['auth','admin']);
 
-Route::get('/getPaymentsRange', 'PaymentController@getPaymentsRange')->middleware('auth');
+Route::get('/getPaymentsRange', 'PaymentController@getPaymentsRange')->middleware(['auth','admin']);
 
 Route::get('/eraser', function () {
     return view('eraser');
-})->middleware('auth');
+})->middleware(['auth','admin']);
 
-Route::get('/erasePayment', 'PaymentController@indexx')->middleware('auth');
+Route::get('/erasePayment', 'PaymentController@indexx')->middleware(['auth','admin']);
 
-Route::get('/erasePost', 'PostController@indexx')->middleware('auth');
+Route::get('/erasePost', 'PostController@indexx')->middleware(['auth','admin']);
