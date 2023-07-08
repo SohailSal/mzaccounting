@@ -26,7 +26,10 @@
             $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
     ?>
 <br>
-
+<br>
+<br>
+<br>
+<br>
 <div class="information">
     <table width="100%">
         <tr>
